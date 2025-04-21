@@ -37,12 +37,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          assets=()
-          for asset in gh-iff-*; do
-            assets+=("-a" "$asset")
-          done
           tag_name="${GITHUB_REF#refs/tags/}"
           gh release create "$tag_name" \
+            gh-iff-windows-amd64.exe \
+            gh-iff-windows-386.exe \
+            gh-iff-darwin-amd64 \
+            gh-iff-darwin-arm64 \
+            gh-iff-linux-amd64 \
+            gh-iff-linux-386 \
+            gh-iff-linux-arm64 \
+            gh-iff-linux-arm \
             --title "$tag_name" \
-            --notes "Release $tag_name" \
-            "${assets[@]}"
+            --notes "Release $tag_name"
