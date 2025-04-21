@@ -1,0 +1,6 @@
+Title,Body,Labels,Assignees
+Add user authentication,Implement user authentication using OAuth 2.0,feature;security,
+Fix responsive layout,The website layout is broken on mobile devices,bug;ui;high-priority,
+Add dark mode support,Users should be able to switch between light and dark themes,enhancement;ui,
+Update documentation,Add missing API endpoints to the documentation,documentation;low-priority,
+Performance optimization,Optimize database queries for better performance,performance;backend;high-priority, 

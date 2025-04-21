@@ -1,4 +1,4 @@
-module github.com/nsutcliffe/gh-issue-from-csv
+module github.com/nsutcliffe/gh-iff
 
 go 1.22.1
 
