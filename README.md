@@ -1,11 +1,11 @@
-# gh issue-from-csv
+# gh iff
 
-A GitHub CLI extension to create multiple issues from a CSV file.
+A GitHub CLI extension to create multiple issues from a (CSV) file.
 
 ## Installation
 
 ```bash
-gh extension install YOUR_USERNAME/gh-issue-from-csv
+gh extension install nsutcliffe/gh-issue-from-csv
 ```
 
 ## Usage
