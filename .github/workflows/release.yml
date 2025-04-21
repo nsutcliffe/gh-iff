@@ -1,14 +1,48 @@
-name: release
+name: Release
+
 on:
   push:
     tags:
-      - "v*"
-permissions:
-  contents: write
+      - 'v*'
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: cli/gh-extension-precompile@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          check-latest: true
+
+      - name: Build
+        run: |
+          # Build for Windows (both 32 and 64 bit)
+          GOOS=windows GOARCH=amd64 go build -o gh-iff-windows-amd64.exe
+          GOOS=windows GOARCH=386 go build -o gh-iff-windows-386.exe
+
+          # Build for macOS (both Intel and Apple Silicon)
+          GOOS=darwin GOARCH=amd64 go build -o gh-iff-darwin-amd64
+          GOOS=darwin GOARCH=arm64 go build -o gh-iff-darwin-arm64
+
+          # Build for Linux (various architectures)
+          GOOS=linux GOARCH=amd64 go build -o gh-iff-linux-amd64
+          GOOS=linux GOARCH=386 go build -o gh-iff-linux-386
+          GOOS=linux GOARCH=arm64 go build -o gh-iff-linux-arm64
+          GOOS=linux GOARCH=arm go build -o gh-iff-linux-arm
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          assets=()
+          for asset in gh-iff-*; do
+            assets+=("-a" "$asset")
+          done
+          tag_name="${GITHUB_REF#refs/tags/}"
+          gh release create "$tag_name" \
+            --title "$tag_name" \
+            --notes "Release $tag_name" \
+            "${assets[@]}"
