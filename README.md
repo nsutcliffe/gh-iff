@@ -5,13 +5,13 @@ A GitHub CLI extension to create multiple issues from a (CSV) file.
 ## Installation
 
 ```bash
-gh extension install nsutcliffe/gh-issue-from-csv
+gh extension install nsutcliffe/gh-iff
 ```
 
 ## Usage
 
 ```bash
-gh issue-from-csv --file <path-to-csv> --repo <owner/repo> [--header=false]
+gh iff --file <path-to-csv> --repo <owner/repo> [--header=false]
 ```
 
 ### Options
@@ -41,12 +41,12 @@ Add dark mode,Implement dark mode theme,enhancement,bobsmith
 
 Create issues from a CSV file with headers:
 ```bash
-gh issue-from-csv --file issues.csv --repo octocat/Hello-World
+gh iff --file issues.csv --repo octocat/Hello-World
 ```
 
 Create issues from a CSV file without headers:
 ```bash
-gh issue-from-csv --file issues.csv --repo octocat/Hello-World --header=false
+gh iff --file issues.csv --repo octocat/Hello-World --header=false
 ```
 
 ## License
